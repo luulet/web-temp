@@ -1,0 +1,26 @@
+body {
+    font-family:'Times New Roman', Times, serif;
+    font-size:larger
+    
+}
+a {
+    color:crimson;
+    text-decoration: none;
+    
+}
+a:hover {
+    color: yellowgreen;
+}
+
+img {
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+tr:nth-child(odd) {
+    background-color: red;
+}
+
+ul {
+    list-style: none;
+}
