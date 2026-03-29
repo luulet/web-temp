@@ -9,7 +9,7 @@ if (posInt >= 1) {
 
         }
     }
-    document.querySelector('#answer').
+    document.querySelector('#answer');
 }
 
 else {
