@@ -1,34 +1,37 @@
-// muuta DOM metodeiksi
-
 const teeMenuHTML = (courses) => {
-    let html = '';
+    const container = document.createElement('div');
+
     for (const course of courses) {
-        const {name, price, diets} = course;
-        html += `
-    <article class="course">
-      <p><strong>${name || 'Ei ilmoitettu'}</strong></p>
-      <p>Hinta: ${price || 'Ei ilmoitettu'}</p>
-      <p>Allergeenit: ${diets.reduce((allergeenit, diet) => {
-            // eslint-disable-next-line no-useless-assignment
-            let ikoni = '';
+        const {name, price, diets = []} = course;
+
+        const article = document.createElement('article');
+        article.className = 'course';
+
+        const nameP = document.createElement('p');
+        const strong = document.createElement('strong');
+        strong.textContent = name || 'Ei ilmoitettu';
+        nameP.append(strong);
+
+        const priceP = document.createElement('p');
+        priceP.textContent = `Hinta: ${price || 'Ei ilmoitettu'}`;
+
+        const dietsP = document.createElement('p');
+        const allergeenit = diets.reduce((acc, diet) => {
+            let ikoni;
             switch (diet) {
-                case 'G':
-                    ikoni = '&#127806;&#128683;';
-                    break;
-                case 'A':
-                    ikoni = '&#127828;';
-                    break;
-                default:
-                    ikoni = '&#127786;';
-                    break;
+                case 'G': ikoni = '🌾🚫'; break;
+                case 'A': ikoni = '🍔';   break;
+                default:  ikoni = '🌿';   break;
             }
-            allergeenit += ' | ' + ikoni;
-            return allergeenit;
-        }, '')}</p>
-    </article>
-    `;
+            return acc + ' | ' + ikoni;
+        }, '');
+        dietsP.textContent = `Allergeenit:${allergeenit || ' –'}`;
+
+        article.append(nameP, priceP, dietsP);
+        container.append(article);
     }
-    return html;
+
+    return container;
 };
 
 export default teeMenuHTML;
